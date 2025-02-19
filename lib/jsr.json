@@ -1,0 +1,20 @@
+{
+    "name": "@quick-vite/gh-pages",
+    "version": "6.1.0-alpha.01",
+    "license": "Apache-2.0",
+    "exports": {
+        "./config": "./src/github-pages-config.mts",
+        ".": "./src/github-pages-imports.mts"
+    },
+    "files": [
+      "./static/*.*"
+    ],
+    "type": "module",
+    "publish": {
+        "exclude": [ "!static" ],
+        "include": [
+            "./src/**/*.*ts",
+            "./static/*.*"
+        ]
+    }
+}

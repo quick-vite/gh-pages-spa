@@ -1,0 +1,34 @@
+{
+  "name": "@quick-vite/gh-pages",
+  "license": "Apache-2.0",
+  "exports": {
+    "./config": {
+      "import": "./dist/github-pages-config.js",
+      "types": "./dist/github-pages-config.d.mts"
+    },
+    ".": {
+      "import": "./dist/github-pages-imports.js",
+      "types": "./dist/github-pages-imports.d.mts"
+    }
+  },
+  "files": [
+    "./static/404.html",
+    "./static/head.js"
+  ],
+  "type": "module",
+  "scripts": {
+    "publish:jsr": "pnpm build && pnpm dlx jsr publish --allow-slow-types",
+		"dev": "vite build --mode development --watch",
+		"build": "vite build"
+  },
+  "dependencies": {
+    "vite": "^6.1.1",
+    "vite-plugin-html-config": "^2.0.2",
+    "vite-plugin-static-copy": "^2.2.0",
+    "vite-plugin-top-level-await": "^1.5.0"
+  },
+  "devDependencies": {
+    "vite-plugin-dts": "^4.5.0",
+    "@types/node": "^22.13.4"
+  }
+}
