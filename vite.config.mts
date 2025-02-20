@@ -3,6 +3,7 @@ import dts from 'vite-plugin-dts';
 
 export default defineConfig({
     define: {
+        // This is so we can use the import.meta stuff from library context
         'import_meta': 'import.meta'
     },
     resolve: {
@@ -32,8 +33,8 @@ export default defineConfig({
         lib: {
             formats: ['es'],
             entry: {
-                'github-pages-config': './src/github-pages-config.mts',
-                'github-pages-imports': './src/github-pages-imports.mts',
+                'github-pages-config': './src/github-pages-config/_module.mts',
+                'github-pages-imports': './src/github-pages-imports/_module.mts',
             }
         }
     }

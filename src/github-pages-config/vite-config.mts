@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 import topLevelAwait from 'vite-plugin-top-level-await'
 import htmlConfig from 'vite-plugin-html-config'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-import { replaceRedirect } from './github-pages-config.head.mts'
+import { replaceRedirect } from './replaceRedirectScript.mts'
 
 const __dirname = fileURLToPath(new URL("./", import.meta.url))
 
