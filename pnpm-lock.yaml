@@ -14,7 +14,7 @@ importers:
 
   example:
     dependencies:
-      '@quick-vite/gh-pages':
+      '@quick-vite/gh-pages-spa':
         specifier: workspace:^
         version: link:../lib
     devDependencies:

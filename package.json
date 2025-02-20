@@ -1,5 +1,5 @@
 {
-  "name": "@quick-vite/gh-pages-project",
+  "name": "@quick-vite/gh-pages-spa-project",
   "version": "0.0.0",
   "description": "Project level pnpm file",
   "private": true,

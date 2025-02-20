@@ -1,5 +1,5 @@
 {
-    "name": "@quick-vite/gh-pages",
+    "name": "@quick-vite/gh-pages-spa",
     "version": "6.1.0-alpha.01",
     "license": "Apache-2.0",
     "exports": {

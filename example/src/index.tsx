@@ -1,7 +1,7 @@
 /* @refresh reload */
 import { render } from 'solid-js/web'
 import { Router, Route } from '@solidjs/router'
-import { replaceGitHubPagesUrl } from '@quick-vite/gh-pages'
+import { replaceGitHubPagesUrl } from '@quick-vite/gh-pages-spa'
 import { AppRoot } from './app'
 import { LandingPage } from './pages/landing-page'
 import { NotFoundPage } from './pages/404'
