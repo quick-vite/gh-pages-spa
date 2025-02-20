@@ -1,10 +1,36 @@
 {
-  "name": "@quick-vite/gh-pages-spa-project",
-  "version": "0.0.0",
-  "description": "Project level pnpm file",
-  "private": true,
-  "packageManager": "pnpm@9.1.1+sha512.14e915759c11f77eac07faba4d019c193ec8637229e62ec99eefb7cf3c3b75c64447882b7c485142451ee3a6b408059cdfb7b7fa0341b975f12d0f7629c71195",
+  "name": "@quick-vite/gh-pages-spa",
+  "license": "Apache-2.0", 
+  "packageManager": "pnpm@9.1.1",
+  "exports": {
+    "./config": {
+      "import": "./dist/github-pages-config.js",
+      "types": "./dist/github-pages-config.d.mts"
+    },
+    ".": {
+      "import": "./dist/github-pages-imports.js",
+      "types": "./dist/github-pages-imports.d.mts"
+    }
+  },
+  "files": [
+    "./static/404.html",
+    "./static/head.js"
+  ],
+  "type": "module",
+  "scripts": {
+    "publish:jsr": "pnpm build && pnpm dlx jsr publish",
+		"dev": "vite build --mode development --watch",
+		"build": "vite build"
+  },
+  "dependencies": {
+    "vite": "^6.1.1",
+    "vite-plugin-html-config": "^2.0.2",
+    "vite-plugin-static-copy": "^2.2.0",
+    "vite-plugin-top-level-await": "^1.5.0"
+  },
   "devDependencies": {
+    "vite-plugin-dts": "^4.5.0",
+    "@types/node": "^22.13.4",
 		"typescript": "~5.7.2"
   }
 }

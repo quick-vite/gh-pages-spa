@@ -7,34 +7,6 @@ settings:
 importers:
 
   .:
-    devDependencies:
-      typescript:
-        specifier: ~5.7.2
-        version: 5.7.3
-
-  example:
-    dependencies:
-      '@quick-vite/gh-pages-spa':
-        specifier: workspace:^
-        version: link:../lib
-    devDependencies:
-      '@solidjs/router':
-        specifier: ^0.15.3
-        version: 0.15.3(solid-js@1.9.4)
-      gh-pages:
-        specifier: ^6.3.0
-        version: 6.3.0
-      solid-js:
-        specifier: ^1.9.4
-        version: 1.9.4
-      vite:
-        specifier: ^6.1.1
-        version: 6.1.1(@types/node@22.13.4)
-      vite-plugin-solid:
-        specifier: ^2.11.0
-        version: 2.11.2(solid-js@1.9.4)(vite@6.1.1(@types/node@22.13.4))
-
-  lib:
     dependencies:
       vite:
         specifier: ^6.1.1
@@ -52,9 +24,34 @@ importers:
       '@types/node':
         specifier: ^22.13.4
         version: 22.13.4
+      typescript:
+        specifier: ~5.7.2
+        version: 5.7.3
       vite-plugin-dts:
         specifier: ^4.5.0
         version: 4.5.0(@types/node@22.13.4)(rollup@4.34.8)(typescript@5.7.3)(vite@6.1.1(@types/node@22.13.4))
+
+  example:
+    dependencies:
+      '@quick-vite/gh-pages-spa':
+        specifier: workspace:^
+        version: link:..
+    devDependencies:
+      '@solidjs/router':
+        specifier: ^0.15.3
+        version: 0.15.3(solid-js@1.9.4)
+      gh-pages:
+        specifier: ^6.3.0
+        version: 6.3.0
+      solid-js:
+        specifier: ^1.9.4
+        version: 1.9.4
+      vite:
+        specifier: ^6.1.1
+        version: 6.1.1(@types/node@22.13.4)
+      vite-plugin-solid:
+        specifier: ^2.11.0
+        version: 2.11.2(solid-js@1.9.4)(vite@6.1.1(@types/node@22.13.4))
 
 packages:
 
