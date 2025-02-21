@@ -10,12 +10,26 @@ on:
       - jsr.json
       - .github/workflows/publish-jsr.yml
 
+# The OIDC ID token is used for authentication with JSR.
+permissions:
+  contents: read
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  # Make the group unique, but, distinguish between automatic and manual dispatch
+  group: jsr-${{ github.ref }}${{ github.event_name == 'workflow_dispatch' && '[dispatch]' || '' }}
+  cancel-in-progress: true
+
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment:
+      name: jsr
+      url: https://jsr.io/@quick-vite/gh-pages-spa
     permissions:
       contents: read
-      id-token: write # The OIDC ID token is used for authentication with JSR.
+      id-token: write 
     steps:
       - uses: actions/checkout@v4 
       # https://github.com/actions/setup-node/issues/819#issuecomment-1659698335
@@ -35,4 +49,3 @@ jobs:
         run: pnpm install
       - name: Publish to JSR registry
         run: pnpm publish:jsr
-        working-directory: './'
