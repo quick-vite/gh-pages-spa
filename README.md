@@ -73,7 +73,7 @@ console.log(fixedPath) //: "https://quick-vite.github.io/gh-pages-spa/path1/"
 console.log(routeBase) //: "/gh-pages-spa"
 ```
 
-And that's it, now you can run vite like normal and deploy it to GitHub Pages.  
+And that's it, now you can run vite like normal and [deploy it to GitHub Pages](#deploying).  
 
 ### SolidJs Routing
 
@@ -122,7 +122,14 @@ render(() =>
 The `routeBase` is extracted from your `package.json`, this is effectively the `virtual:@quick-vite/gh-pages-spa/route-base` import.  
 The `<PagesReRouter>` component is a custom route that handles the encoded urls for you.
 
-And that's it, now you can run vite like normal and deploy it to GitHub Pages.  
+And that's it, now you can run vite like normal and [deploy it to GitHub Pages](#deploying).  
+
+## Deploying
+
+To deploy to GitHub Pages you'll need to add a pipeline using [`actions/deploy-pages@v4`](https://github.com/actions/deploy-pages).  
+You can use [our example pipeline](https://github.com/quick-vite/gh-pages-spa/blob/main/.github/workflows/publish-pages.yml) as reference.  
+
+Alternatively, you can deploy it using the [`gh-pages` npm package](https://www.npmjs.com/package/gh-pages). Just don't forget to add the `--nojekyll` flag.
 
 ## Versioning
 
