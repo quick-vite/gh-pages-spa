@@ -14,6 +14,8 @@ export default defineConfig({
             tsconfigPath: "./tsconfig.json",
             // This doesn't seem to work when the entries have the same filename
             rollupTypes: false,
+            // Necessary for virtual imports
+            copyDtsFiles: true,
             include: [
                 './src/**'
             ],

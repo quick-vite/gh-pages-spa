@@ -13,23 +13,12 @@ To make the setup for that faster, you can use this library.
 ## How to use it?
 
 Install the package using your favorite package manager from the JSR repository.  
-Replace your regular vite config, or create one, with the following code:
+Replace your regular vite config, or create one, with our config.
 
-```ts
-// ~/vite.config.mts
+### Base requirements
 
-import packageJson from './package.json' with { type: 'json' };
-import { gitHubSpaConfig } from "@quick-vite/gh-pages-spa/config";
-
-export default gitHubSpaConfig(packageJson, {
-    // Add your regular vite config here
-})
-```
-
-This provides you with a pre-configured vite SPA, the config strips out some options that have to be set the way we expect.  
-
-Next, make sure you set your github-pages url in the package.json of your project.  
-This is both necessary for publishing to GitHub Pages, and we use it for the vite base path.
+Make sure you set your GitHub Pages url in the package.json of your project.  
+This is both necessary for publishing to GitHub Pages, and we use it for the route and Vite base path.
 
 ```yaml
 {
@@ -45,15 +34,33 @@ This is both necessary for publishing to GitHub Pages, and we use it for the vit
 }
 ```
 
-And that's it, now you can run vite like normal and deploy it to GitHub Pages.  
+### Vanilla routing
 
-## Using routers
+Make sure your Vite config at least has this configuration:
+
+```ts
+// ~/vite.config.mts
+
+import { gitHubSpaConfig, injectGitHubPagesRedirect } from "@quick-vite/gh-pages-spa/config";
+import packageJson from './package.json' with { type: 'json' }
+
+export default gitHubSpaConfig(packageJson, {
+    plugins: [
+        injectGitHubPagesRedirect(),
+    ],
+    build: {
+        target: 'esnext'
+    }
+})
+```
+
+This provides you with a pre-configured vite SPA, the config strips out some options that have to be set the way we expect.  
 
 Because the script this library inserts into the head to fix the GitHub url redirect, you need to filter out this route.  
 To do so, we provide you with a function.  
 
 ```ts
-import { replaceGitHubPagesUrl } from '@quick-vite/gh-pages-spa'
+import { replaceGitHubPagesUrl } from '@quick-vite/gh-pages-spa/imports'
 
 const example = "https://quick-vite.github.io/?/gh-pages-spa/path1/"
 const fixedPath = replaceGitHubPagesUrl(example)
@@ -61,9 +68,36 @@ const fixedPath = replaceGitHubPagesUrl(example)
 console.log(fixedPath) //: "https://quick-vite.github.io/gh-pages-spa/path1/"
 ```
 
-### SolidJs
+If you need to know the route-base of you GitHub Pages app, you can access this through a virtual import.
 
-Currently, this library has only been tested on the solid-js router.  
+```ts
+import { routeBase } from 'virtual:@quick-vite/gh-pages-spa/route-base'
+console.log(fixedPath) //: "/gh-pages-spa"
+```
+
+If you'd like to have type completion add this to your `tsconfig.app.json`:
+
+```yaml
+# tsconfig.app.json
+
+{
+    "compilerOptions": {
+        # ... removed for brevity 
+
+        "types": [
+            "@quick-vite/gh-pages-spa/config"
+        ]
+    }
+}
+```
+
+And that's it, now you can run vite like normal and deploy it to GitHub Pages.  
+
+### SolidJs Routing
+
+> ![NOTE]  
+> Currently, this library has only been tested on the solid-js router.  
+
 Because the browser appends the history using the default history api, intercepting links with this router breaks.  
 We will fix this in the future: <https://github.com/quick-vite/gh-pages-spa/issues/4>.
 For now, you should disable `explicitLinks` in addition to using the `replaceGitHubPagesUrl` as route filter.  
