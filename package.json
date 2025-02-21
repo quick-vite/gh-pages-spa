@@ -7,9 +7,9 @@
       "import": "./dist/github-pages-config.js",
       "types": "./dist/github-pages-config/_module.d.mts"
     },
-    "./imports": {
-      "import": "./dist/github-pages-imports.js",
-      "types": "./dist/github-pages-imports/_module.d.mts"
+    "./vanilla": {
+      "import": "./dist/github-pages-vanilla.js",
+      "types": "./dist/github-pages-vanilla/src/_module.d.mts"
     },
     "./solidjs": {
       "import": "./dist/github-pages-solidjs.js",

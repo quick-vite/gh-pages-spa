@@ -57,40 +57,20 @@ export default gitHubSpaConfig(packageJson, {
 The `gitHubSpaConfig` adds a 404 page that encodes the URL that was attempted and redirects.  
 To handle this redirect we need to configure some additional routing, this is done by adding the `injectGitHubPagesRedirect` plugin.  
 Together, this provides you with a pre-configured vite SPA, the config strips out some options that have to be set the way we expect.  
-
-Because the script this library inserts into the head to fix the GitHub url redirect, you might need to filter out this route. This can be useful to render content before the redirect happens.  
-To do so, we provide you with a function.  
+ 
+The library comes with some utilities:
 
 ```ts
-import { replaceGitHubPagesUrl } from '@quick-vite/gh-pages-spa/imports'
+import { routeBase, replaceGitHubPagesUrl } from '@quick-vite/gh-pages-spa/vanilla'
 
+// Because the script this library inserts into the head to fix the GitHub url redirect, you might need to filter out this route. This can be useful to render content before the redirect happens. 
 const example = "https://quick-vite.github.io/?/gh-pages-spa/path1/"
 const fixedPath = replaceGitHubPagesUrl(example)
 
 console.log(fixedPath) //: "https://quick-vite.github.io/gh-pages-spa/path1/"
-```
 
-If you need to know the route-base of you GitHub Pages app, you can access this through a virtual import.
-
-```ts
-import { routeBase } from 'virtual:@quick-vite/gh-pages-spa/route-base'
-console.log(fixedPath) //: "/gh-pages-spa"
-```
-
-If you'd like to have type completion add this to your `tsconfig.app.json`:
-
-```yaml
-# tsconfig.app.json
-
-{
-    "compilerOptions": {
-        # ... removed for brevity 
-
-        "types": [
-            "@quick-vite/gh-pages-spa/config"
-        ]
-    }
-}
+// If you need to know the route-base of you GitHub Pages app, you can access this through the `routeBase` constant
+console.log(routeBase) //: "/gh-pages-spa"
 ```
 
 And that's it, now you can run vite like normal and deploy it to GitHub Pages.  

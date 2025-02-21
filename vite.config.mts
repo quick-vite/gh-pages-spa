@@ -52,7 +52,7 @@ export default defineConfig({
             formats: ['es'],
             entry: {
                 'github-pages-config': './src/github-pages-config/_module.mts',
-                'github-pages-imports': './src/github-pages-imports/_module.mts'
+                'github-pages-vanilla': './src/github-pages-vanilla/src/_module.mts'
             }
         }
     }
