@@ -1,6 +1,8 @@
-import { defineConfig } from "vite";
+import path from "node:path";
+import { defineConfig, normalizePath } from "vite";
 import dts from 'vite-plugin-dts';
-import multiple from 'vite-plugin-multiple'
+import solid from 'vite-plugin-solid'
+
 
 export default defineConfig({
     define: {
@@ -11,12 +13,15 @@ export default defineConfig({
         preserveSymlinks: true,
     },
     plugins: [
+        solid(),
         dts({
             tsconfigPath: "./tsconfig.json",
             // This doesn't seem to work when the entries have the same filename
             rollupTypes: false,
             // Necessary for virtual imports
             copyDtsFiles: true,
+            outDir: normalizePath(path.resolve(__dirname, '../../dist/github-pages-solidjs')),
+            entryRoot: normalizePath(path.resolve(__dirname, './src/')),
             include: [
                 './src/**'
             ],
@@ -24,12 +29,6 @@ export default defineConfig({
                 'vite.config.mts'
             ]
         }),
-        multiple([
-            {
-                name: 'github-pages-solidjs',
-                config: './src/github-pages-solidjs/vite.config.mts',
-            },
-        ])
     ],
     esbuild: {
         minifyIdentifiers: false,
@@ -44,15 +43,18 @@ export default defineConfig({
                 esModule: true,
             },
             external: [
+                /^solid-js/,
+                /^@solidjs/,
                 /^vite/,
                 /^virtual:/,
             ]
         },
+        outDir: normalizePath(path.resolve(__dirname, '../../dist')),
+        emptyOutDir: false,
         lib: {
             formats: ['es'],
             entry: {
-                'github-pages-config': './src/github-pages-config/_module.mts',
-                'github-pages-imports': './src/github-pages-imports/_module.mts'
+                'github-pages-solidjs':  normalizePath(path.resolve(__dirname, './src/_module.mts')),
             }
         }
     }

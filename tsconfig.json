@@ -25,8 +25,12 @@
 		"declaration": true,
 		"declarationDir": "./dist",
 		"declarationMap": true,
+
+		"jsx": "preserve",
+
 		"types": [
-			"./src/vite-env.d.ts"
+			"./src/vite-env.d.ts",
+			"./types/vite-plugin-multiple.d.ts"
 		]
 	},
 	
@@ -34,5 +38,8 @@
 		"./vite.config.mts",
 		"./src/*.*",
 		"./static/*.*"
+	],
+	"exclude": [
+		"src/github-pages-solidjs"
 	]
 }

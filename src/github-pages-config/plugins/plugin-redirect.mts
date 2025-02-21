@@ -1,6 +1,7 @@
 import { type Plugin } from 'vite'
 
 import htmlConfig from 'vite-plugin-html-config'
+import { decodeGitHubPagesUrl } from '../../shared/decode-url.mts'
 
 /**
  * ## `vite-plugin-gh-pages-spa/redirect`
@@ -24,6 +25,7 @@ export const injectGitHubPagesRedirect = (): Plugin => {
 }
 
 export function replaceRedirect(location: Location, history: History) {
+	
 	// Single Page Apps for GitHub Pages
 	// MIT License
 	// https://github.com/rafgraph/spa-github-pages
@@ -36,16 +38,9 @@ export function replaceRedirect(location: Location, history: History) {
 	// the single page app to route accordingly.
 
 	if (location.search[1] === '/') {
-		const decoded = location.search
-			.slice(1)
-			.split('&')
-			.map(function (s) {
-				return s.replace(/~and~/g, '&')
-			})
-			.join('?')
-
-		history.replaceState(null, null as any,
-			location.pathname.slice(0, -1) + decoded + location.hash
+		history.replaceState(
+			null, null as any,
+			decodeGitHubPagesUrl(location)
 		)
 	}
 }

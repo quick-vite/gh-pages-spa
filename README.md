@@ -54,9 +54,11 @@ export default gitHubSpaConfig(packageJson, {
 })
 ```
 
-This provides you with a pre-configured vite SPA, the config strips out some options that have to be set the way we expect.  
+The `gitHubSpaConfig` adds a 404 page that encodes the URL that was attempted and redirects.  
+To handle this redirect we need to configure some additional routing, this is done by adding the `injectGitHubPagesRedirect` plugin.  
+Together, this provides you with a pre-configured vite SPA, the config strips out some options that have to be set the way we expect.  
 
-Because the script this library inserts into the head to fix the GitHub url redirect, you need to filter out this route.  
+Because the script this library inserts into the head to fix the GitHub url redirect, you might need to filter out this route. This can be useful to render content before the redirect happens.  
 To do so, we provide you with a function.  
 
 ```ts
@@ -95,36 +97,52 @@ And that's it, now you can run vite like normal and deploy it to GitHub Pages.
 
 ### SolidJs Routing
 
-> ![NOTE]  
-> Currently, this library has only been tested on the solid-js router.  
+Make sure your Vite config at least has this configuration:
 
-Because the browser appends the history using the default history api, intercepting links with this router breaks.  
-We will fix this in the future: <https://github.com/quick-vite/gh-pages-spa/issues/4>.
-For now, you should disable `explicitLinks` in addition to using the `replaceGitHubPagesUrl` as route filter.  
-**NOTE!** This issue is not always visible, it depends on whether you use routing information in context.  
+```ts
+// ~/vite.config.mts
+
+import { gitHubSpaConfig } from "@quick-vite/gh-pages-spa/config";
+import solid from 'vite-plugin-solid'
+
+import packageJson from './package.json' with { type: 'json' }
+
+export default gitHubSpaConfig(packageJson, {
+    plugins: [solid()]
+})
+```
+
+This provides you with a pre-configured vite SPA, a basic solid-js SPA.  
+This adds a 404 page that encodes the URL that was attempted and redirects.  
+To handle this redirect we need to configure some additional routing:
 
 ```tsx
 /* @refresh reload */
 import { render } from 'solid-js/web'
 import { Router, Route } from '@solidjs/router'
-import { replaceGitHubPagesUrl } from '@quick-vite/gh-pages-spa'
+import { routeBase, PagesReRouter } from '@quick-vite/gh-pages-spa/solidjs'
+
 import { AppRoot } from './app'
 import { LandingPage } from './pages/landing-page'
 import { NotFoundPage } from './pages/404'
-import { Example1, Example2 } from './pages/example'
+import { Example } from './pages/example'
 
-// The solid navigation fails on the homepage
-// So we turn on explicitLinks and use normal anchors
 render(() =>
-    <Router base={import.meta.env.routeBase} explicitLinks={true} transformUrl={replaceGitHubPagesUrl} root={AppRoot}>
-        <Route path="/path1/" component={Example1} />
-        <Route path="/path2/" component={Example2} />
-        <Route path="/" component={LandingPage} />
-        <Route path="*404" component={NotFoundPage} />
+    <Router base={routeBase} root={AppRoot}>
+        <PagesReRouter>
+            <Route path="/example/:id/" component={Example} />
+            <Route path="/" component={LandingPage} />
+            <Route path="*404" component={NotFoundPage} />
+        </PagesReRouter>
     </Router>,
     document.getElementById('root')!
 )
 ```
+
+The `routeBase` is extracted from your `package.json`, this is effectively the `virtual:@quick-vite/gh-pages-spa/route-base` import.  
+The `<PagesReRouter>` component is a custom route that handles the encoded urls for you.
+
+And that's it, now you can run vite like normal and deploy it to GitHub Pages.  
 
 ## Versioning
 
