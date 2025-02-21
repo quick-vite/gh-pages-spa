@@ -1,9 +1,14 @@
-name: Publish
+name: Publish `jsr`
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+    paths:
+      # Only publish on version changes
+      - jsr.json
+      - .github/workflows/publish-jsr.yml
 
 jobs:
   publish:
@@ -31,6 +36,3 @@ jobs:
       - name: Publish to JSR registry
         run: pnpm publish:jsr
         working-directory: './'
-      - name: Publish example to pages
-        run: pnpm publish:gh-pages
-        working-directory: './example'

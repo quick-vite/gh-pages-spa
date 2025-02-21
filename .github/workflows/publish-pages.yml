@@ -1,0 +1,38 @@
+name: Publish `gh-pages`
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      # Only publish when the example changes
+      - example/**
+      - .github/workflows/publish-pages.yml
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # The OIDC ID token is used for authentication with JSR.
+    steps:
+      - uses: actions/checkout@v4 
+      # https://github.com/actions/setup-node/issues/819#issuecomment-1659698335
+      - uses: actions/cache@v3
+        with:
+          path: '~/.pnpm'
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+          check-latest: true
+      - name: Install dependencies
+        run: pnpm install
+      - name: Publish example to pages
+        run: pnpm publish:gh-pages
+        working-directory: './example'
