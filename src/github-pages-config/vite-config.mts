@@ -19,12 +19,16 @@ const parseBase = (packageJson: GitHubPackageJson) => {
 	const result = homepage.match(baseRegex);
     if (!result?.groups?.repo) throw new Error('A GitHub-Pages URL needs to be formatted like "https://{user}.github.io/{repo}/"')
 
-    return `/${result.groups!['repo']!}/`
+    return result.groups!['repo']!
 }
 
 const appendConfig = (packageJson: GitHubPackageJson, userConfig: UserConfig) => Object.assign(userConfig, {
     appType: 'spa',
-	base: parseBase(packageJson),
+	base: `/${parseBase(packageJson)}/`,
+	// TODO https://github.com/quick-vite/gh-pages-spa/issues/4 Make virtual import
+	define: {
+	  "import.meta.env.routeBase": JSON.stringify(`/${parseBase(packageJson)}`)
+	},
     plugins: [
 		topLevelAwait(),
 		htmlConfig({

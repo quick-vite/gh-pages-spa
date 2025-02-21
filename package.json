@@ -5,11 +5,11 @@
   "exports": {
     "./config": {
       "import": "./dist/github-pages-config.js",
-      "types": "./dist/github-pages-config.d.mts"
+      "types": "./dist/github-pages-config/_module.d.mts"
     },
     ".": {
       "import": "./dist/github-pages-imports.js",
-      "types": "./dist/github-pages-imports.d.mts"
+      "types": "./dist/github-pages-imports/_module.d.mts"
     }
   },
   "files": [
