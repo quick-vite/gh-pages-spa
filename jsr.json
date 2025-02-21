@@ -3,8 +3,8 @@
     "version": "6.1.0-alpha.03",
     "license": "Apache-2.0",
     "exports": {
-        "./config": "./src/github-pages-config.mts",
-        ".": "./src/github-pages-imports.mts"
+        "./config": "./src/github-pages-config/_module.mts",
+        ".": "./src/github-pages-imports/_module.mts"
     },
     "files": [
       "./static/*.*"
