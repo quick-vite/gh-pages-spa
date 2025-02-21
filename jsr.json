@@ -4,8 +4,8 @@
     "license": "Apache-2.0",
     "exports": {
         "./config": "./src/github-pages-config/_module.mts",
-        "./vanilla": "./src/github-pages-vanilla/_module.mts",
-        "./solidjs": "./src/github-pages-solidjs/_module.mts"
+        "./vanilla": "./src/github-pages-vanilla/src/_module.mts",
+        "./solidjs": "./src/github-pages-solidjs/src/_module.mts"
     },
     "files": [
       "./static/*.*"
