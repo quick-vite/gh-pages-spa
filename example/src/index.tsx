@@ -10,7 +10,7 @@ import { Example1, Example2 } from './pages/example'
 // The solid navigation fails on the homepage
 // So we turn on explicitLinks and use normal anchors
 render(() =>
-	<Router base={import.meta.env.routeBase} explicitLinks={true} transformUrl={replaceGitHubPagesUrl} root={AppRoot}>
+	<Router base={import.meta.env.routeBase} transformUrl={replaceGitHubPagesUrl} root={AppRoot}>
 		<Route path="/path1/" component={Example1} />
 		<Route path="/path2/" component={Example2} />
 		<Route path="/" component={LandingPage} />
