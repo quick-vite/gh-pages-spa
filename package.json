@@ -13,8 +13,7 @@
     }
   },
   "files": [
-    "./static/404.html",
-    "./static/head.js"
+    "./static/404.html"
   ],
   "type": "module",
   "scripts": {
