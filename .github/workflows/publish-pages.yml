@@ -33,6 +33,9 @@ jobs:
           check-latest: true
       - name: Install dependencies
         run: pnpm install
+      - name: Build lib
+        run: pnpm build
+        working-directory: '.'
       - name: Publish example to pages
         run: pnpm publish:gh-pages
         working-directory: './example'
