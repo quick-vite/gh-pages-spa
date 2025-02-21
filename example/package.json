@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "description": "Example of @quick-vite/gh-pages-spa",
-  "main": "index.js",
+  "main": "index.html",
   "homepage": "https://quick-vite.github.io/gh-pages-spa/",
   "scripts": {
     "dev": "vite",
