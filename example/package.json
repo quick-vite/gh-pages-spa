@@ -9,7 +9,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "gh-deploy": "pnpm build && gh-pages -d dist --nojekyll",
+    "publish:gh-pages": "pnpm build && gh-pages -d dist --nojekyll",
     "gh-pages": "gh-pages"
   },
   "dependencies": {
