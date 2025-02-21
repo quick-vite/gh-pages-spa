@@ -65,7 +65,7 @@ console.log(fixedPath) //: "https://quick-vite.github.io/gh-pages-spa/path1/"
 
 Currently, this library has only been tested on the solid-js router.  
 Because the browser appends the history using the default history api, intercepting links with this router breaks.  
-We will fix this in the future: .
+We will fix this in the future: <https://github.com/quick-vite/gh-pages-spa/issues/4>.
 For now, you should disable `explicitLinks` in addition to using the `replaceGitHubPagesUrl` as route filter.
 
 ```tsx
@@ -81,7 +81,7 @@ import { Example1, Example2 } from './pages/example'
 // The solid navigation fails on the homepage
 // So we turn on explicitLinks and use normal anchors
 render(() =>
-    <Router base={import.meta.env.BASE_URL} explicitLinks={true} transformUrl={replaceGitHubPagesUrl} root={AppRoot}>
+    <Router base={import.meta.env.routeBase} explicitLinks={true} transformUrl={replaceGitHubPagesUrl} root={AppRoot}>
         <Route path="/path1/" component={Example1} />
         <Route path="/path2/" component={Example2} />
         <Route path="/" component={LandingPage} />

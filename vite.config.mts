@@ -11,7 +11,15 @@ export default defineConfig({
     },
     plugins: [
         dts({
-            entryRoot: './src'
+            tsconfigPath: "./tsconfig.json",
+            // This doesn't seem to work when the entries have the same filename
+            rollupTypes: false,
+            include: [
+                './src/**'
+            ],
+            exclude: [
+                'vite.config.mts'
+            ]
         }),
     ],
     esbuild: {

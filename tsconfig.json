@@ -24,8 +24,12 @@
 
 		"declaration": true,
 		"declarationDir": "./dist",
-		"declarationMap": true
+		"declarationMap": true,
+		"types": [
+			"./src/vite-env.d.ts"
+		]
 	},
+	
 	"include": [
 		"./vite.config.mts",
 		"./src/*.*",
