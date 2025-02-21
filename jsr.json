@@ -1,6 +1,6 @@
 {
     "name": "@quick-vite/gh-pages-spa",
-    "version": "6.1.0-alpha.5",
+    "version": "6.1.0",
     "license": "Apache-2.0",
     "exports": {
         "./config": "./src/github-pages-config/_module.mts",
