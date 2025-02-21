@@ -1,10 +1,11 @@
 {
     "name": "@quick-vite/gh-pages-spa",
-    "version": "6.1.0",
+    "version": "6.2.0",
     "license": "Apache-2.0",
     "exports": {
         "./config": "./src/github-pages-config/_module.mts",
-        ".": "./src/github-pages-imports/_module.mts"
+        "./vanilla": "./src/github-pages-vanilla/_module.mts",
+        "./solidjs": "./src/github-pages-solidjs/_module.mts"
     },
     "files": [
       "./static/*.*"

@@ -3,10 +3,8 @@ import { type UserConfigFnObject as ViteUserConfigFnObject, type UserConfig as V
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import topLevelAwait from 'vite-plugin-top-level-await'
-import htmlConfig from 'vite-plugin-html-config'
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-import { replaceRedirect } from './replaceRedirectScript.mts'
+import { pluginVirtualImports } from './plugins/plugin-imports.mts'
 
 const __dirname = fileURLToPath(new URL("./", import.meta.url))
 
@@ -25,24 +23,8 @@ const parseBase = (packageJson: GitHubPackageJson) => {
 const appendConfig = (packageJson: GitHubPackageJson, userConfig: UserConfig) => Object.assign(userConfig, {
     appType: 'spa',
 	base: `/${parseBase(packageJson)}/`,
-	// TODO https://github.com/quick-vite/gh-pages-spa/issues/4 Make virtual import
-	define: {
-	  "import.meta.env.routeBase": JSON.stringify(`/${parseBase(packageJson)}`)
-	},
     plugins: [
-		topLevelAwait(),
-		htmlConfig({
-			headScripts: [
-				`(${replaceRedirect.toString()})(window.location, window.history)`
-			],
-			metas: [
-				// This adds a way to inspect wether gh-pages cache is invalidated
-				{
-					name: 'version',
-					content: packageJson.version
-				}
-			]
-		}),
+		pluginVirtualImports(`/${parseBase(packageJson)}`),
 		viteStaticCopy({
 			targets: [
 				{
@@ -55,20 +37,28 @@ const appendConfig = (packageJson: GitHubPackageJson, userConfig: UserConfig) =>
     ]
 } as ViteUserConfig)
 
+/** Basic requirements we need from the `package.json` */
 type GitHubPackageJson = {
     name: string,
     version: string,
     homepage: string
 }
 
+/** @inheritdoc ViteUserConfig */
 type UserConfig = Omit<ViteUserConfig, 'appType'>
+/** @inheritdoc ViteUserConfig */
 type UserConfigFnObject = (...params: Parameters<ViteUserConfigFnObject>) => ViteUserConfig
+/** @inheritdoc ViteUserConfig */
 type UserConfigFnPromise = (...params: Parameters<ViteUserConfigFnObject>) => Promise<ViteUserConfig>
+/** @inheritdoc ViteUserConfig */
 type UserConfigFn = (...params: Parameters<ViteUserConfigFnObject>) => ViteUserConfig | Promise<ViteUserConfig>;
+/** @inheritdoc ViteUserConfig */
 type UserConfigExport = UserConfig | Promise<UserConfig> | UserConfigFnObject | UserConfigFnPromise | UserConfigFn;
 
 /**
- * Create a pre-configured {@link ViteUserConfig vite configuration} for GitHub-Pages
+ * Create a pre-configured {@link ViteUserConfig vite configuration} for GitHub-Pages.
+ * 
+ * For documentation see: {@link https://jsr.io/@quick-vite/gh-pages-spa/doc/config}.
  */
 export function gitHubSpaConfig(packageJson: GitHubPackageJson, config: UserConfig): ViteUserConfig;
 export function gitHubSpaConfig(packageJson: GitHubPackageJson,config: Promise<UserConfig>): Promise<ViteUserConfig>;

@@ -1,15 +1,19 @@
 {
   "name": "@quick-vite/gh-pages-spa",
-  "license": "Apache-2.0", 
+  "license": "Apache-2.0",
   "packageManager": "pnpm@9.1.1",
   "exports": {
     "./config": {
       "import": "./dist/github-pages-config.js",
       "types": "./dist/github-pages-config/_module.d.mts"
     },
-    ".": {
-      "import": "./dist/github-pages-imports.js",
-      "types": "./dist/github-pages-imports/_module.d.mts"
+    "./vanilla": {
+      "import": "./dist/github-pages-vanilla.js",
+      "types": "./dist/github-pages-vanilla/src/_module.d.mts"
+    },
+    "./solidjs": {
+      "import": "./dist/github-pages-solidjs.js",
+      "types": "./dist/github-pages-solidjs/_module.d.mts"
     }
   },
   "files": [
@@ -18,8 +22,8 @@
   "type": "module",
   "scripts": {
     "publish:jsr": "pnpm build && pnpm dlx jsr publish",
-		"dev": "vite build --mode development --watch",
-		"build": "vite build"
+    "dev": "vite build --mode development --watch",
+    "build": "vite build"
   },
   "dependencies": {
     "vite": "^6.1.1",
@@ -27,9 +31,16 @@
     "vite-plugin-static-copy": "^2.2.0",
     "vite-plugin-top-level-await": "^1.5.0"
   },
+  "optionalDependencies": {
+    "@solidjs/router": "^0.15.3",
+    "solid-js": "^1.9.4"
+  },
   "devDependencies": {
-    "vite-plugin-dts": "^4.5.0",
     "@types/node": "^22.13.4",
-		"typescript": "~5.7.2"
+    "rollup": "^4.34.8",
+    "typescript": "~5.7.2",
+    "vite-plugin-dts": "^4.5.0",
+    "vite-plugin-multiple": "^0.2.0",
+    "vite-plugin-solid": "^2.11.0"
   }
 }
