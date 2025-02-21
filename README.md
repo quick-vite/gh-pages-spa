@@ -66,7 +66,8 @@ console.log(fixedPath) //: "https://quick-vite.github.io/gh-pages-spa/path1/"
 Currently, this library has only been tested on the solid-js router.  
 Because the browser appends the history using the default history api, intercepting links with this router breaks.  
 We will fix this in the future: <https://github.com/quick-vite/gh-pages-spa/issues/4>.
-For now, you should disable `explicitLinks` in addition to using the `replaceGitHubPagesUrl` as route filter.
+For now, you should disable `explicitLinks` in addition to using the `replaceGitHubPagesUrl` as route filter.  
+**NOTE!** This issue is not always visible, it depends on whether you use routing information in context.  
 
 ```tsx
 /* @refresh reload */
