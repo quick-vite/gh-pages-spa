@@ -40,6 +40,7 @@
 		"./static/*.*"
 	],
 	"exclude": [
-		"src/github-pages-solidjs"
+		"src/github-pages-solidjs/src/",
+		"src/github-pages-solidjs/vite.config.mts"
 	]
 }
