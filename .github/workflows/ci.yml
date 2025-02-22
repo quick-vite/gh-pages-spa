@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+    types: [opened, reopened] 
+
+permissions:
+  contents: read
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  # Make the group unique, but, distinguish between automatic and manual dispatch
+  group: ci-${{ github.ref }}${{ github.event_name == 'workflow_dispatch' && '[dispatch]' || '' }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4 
+        with:
+          lfs: true
+      # Supposedly this speeds up the build
+      # https://github.com/actions/setup-node/issues/819#issuecomment-1659698335
+      - uses: actions/cache@v3
+        with:
+          path: '~/.pnpm'
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: 'pnpm'
+          cache-dependency-path: 'pnpm-lock.yaml'
+          check-latest: true
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build lib
+        run: pnpm build
+        working-directory: '.'
+      - name: Build example
+        run: pnpm build
+        working-directory: './example'
