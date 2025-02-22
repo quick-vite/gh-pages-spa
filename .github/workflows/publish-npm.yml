@@ -1,8 +1,4 @@
-## At this moment, JSR supports neither TSX nor virtual modules.
-## Because of this, we will not pursue JSR for now.
-## This pipeline is still active, however, deployments fail.
-
-name: Publish `jsr`
+name: Publish `npm`
 
 on:
   workflow_dispatch:
@@ -11,8 +7,8 @@ on:
       - main
     paths:
       # Only publish on version changes
-      - jsr.json
-      - .github/workflows/publish-jsr.yml
+      - package.json
+      - .github/workflows/publish-npm.yml
 
 # The OIDC ID token is used for authentication with JSR.
 permissions:
@@ -22,14 +18,14 @@ permissions:
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 concurrency:
   # Make the group unique, but, distinguish between automatic and manual dispatch
-  group: jsr-${{ github.ref }}${{ github.event_name == 'workflow_dispatch' && '[dispatch]' || '' }}
+  group: npm-${{ github.ref }}${{ github.event_name == 'workflow_dispatch' && '[dispatch]' || '' }}
   cancel-in-progress: true
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     environment:
-      name: jsr
+      name: npm
       url: https://jsr.io/@quick-vite/gh-pages-spa
     permissions:
       contents: read
@@ -50,7 +46,10 @@ jobs:
           cache: 'pnpm'
           cache-dependency-path: 'pnpm-lock.yaml'
           check-latest: true
+          registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: pnpm install
-      - name: Publish to JSR registry
-        run: pnpm publish:jsr
+      - name: Publish to NPM registry
+        run: pnpm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
