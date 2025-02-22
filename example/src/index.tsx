@@ -8,13 +8,12 @@ import { LandingPage } from './pages/landing-page'
 import { NotFoundPage } from './pages/404'
 import { Example } from './pages/example'
 
-render(() =>
-	<Router base={routeBase} root={AppRoot}>
-		<PagesReRouter>
-			<Route path="/example/:id/" component={Example} />
-			<Route path="/" component={LandingPage} />
-			<Route path="*404" component={NotFoundPage} />
-		</PagesReRouter>
-	</Router>,
-	document.getElementById('root')!
-)
+export const routes = <Router base={routeBase} root={AppRoot}>
+	<PagesReRouter>
+		<Route path="/example/:id/" component={Example} />
+		<Route path="/" component={LandingPage} />
+		<Route path="*404" component={NotFoundPage} />
+	</PagesReRouter>
+</Router>
+
+render(() => routes, document.getElementById('root')!)

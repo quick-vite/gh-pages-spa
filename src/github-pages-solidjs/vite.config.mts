@@ -2,7 +2,6 @@ import path from "node:path";
 import { defineConfig, normalizePath } from "vite";
 import dts from 'vite-plugin-dts';
 import solid from 'vite-plugin-solid'
-import stringReplace from 'vite-plugin-string-replace'
 
 export default defineConfig({
     define: {
@@ -14,11 +13,6 @@ export default defineConfig({
     },
     plugins: [
         solid(),
-        // Revert JSR compat fix
-        stringReplace([{
-            search: 'file:@quick-vite/gh-pages-spa/route-base',
-            replace: 'virtual:@quick-vite/gh-pages-spa/route-base'
-        }]),
         dts({
             tsconfigPath: "./tsconfig.json",
             // This doesn't seem to work when the entries have the same filename

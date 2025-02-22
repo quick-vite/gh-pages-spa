@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import dts from 'vite-plugin-dts';
 import multiple from 'vite-plugin-multiple'
-import stringReplace from 'vite-plugin-string-replace'
 
 export default defineConfig({
     define: {
@@ -25,11 +24,6 @@ export default defineConfig({
                 'vite.config.mts'
             ]
         }),
-        // Revert JSR compat fix
-        stringReplace([{
-            search: 'file:@quick-vite/gh-pages-spa/route-base',
-            replace: 'virtual:@quick-vite/gh-pages-spa/route-base'
-        }]),
         multiple([
             {
                 name: 'github-pages-solidjs',

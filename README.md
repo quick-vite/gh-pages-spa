@@ -58,7 +58,7 @@ export default gitHubSpaConfig(packageJson, {
 The `gitHubSpaConfig` adds a 404 page that encodes the URL that was attempted and redirects.  
 To handle this redirect we need to configure some additional routing, this is done by adding the `injectGitHubPagesRedirect` plugin.  
 Together, this provides you with a pre-configured vite SPA, the config strips out some options that have to be set the way we expect.  
- 
+
 The library comes with some utilities:
 
 ```ts
@@ -130,7 +130,8 @@ And that's it, now you can run vite like normal and [deploy it to GitHub Pages](
 To deploy to GitHub Pages you'll need to add a pipeline using [`actions/deploy-pages@v4`](https://github.com/actions/deploy-pages).  
 You can use [our example pipeline](https://github.com/quick-vite/gh-pages-spa/blob/main/.github/workflows/publish-pages.yml) as reference.  
 
-Alternatively, you can deploy it using the [`gh-pages` npm package](https://www.npmjs.com/package/gh-pages). Just don't forget to add the `--nojekyll` flag.
+Alternatively, you can deploy it using the [`gh-pages` npm package](https://www.npmjs.com/package/gh-pages).  
+Just don't forget to add the `--nojekyll` flag.
 
 ## Versioning
 
