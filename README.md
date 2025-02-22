@@ -1,8 +1,9 @@
 # Vite config `gh-pages-spa`  
 
 [![JSR](https://jsr.io/badges/@quick-vite/gh-pages-spa)](https://jsr.io/@quick-vite/gh-pages-spa)
+[![NPM](https://img.shields.io/npm/v/%40quick-vite%2Fgh-pages-spa)](https://www.npmjs.com/package/@quick-vite/gh-pages-spa)
 
-A quick setup for hosting a SPA on [GitHub pages](https://pages.github.com/) using [Vite](https://pages.github.com/).
+A quick setup for hosting a SPA on [GitHub pages](https://pages.github.com/) using [Vite](https://pages.github.com/).  
 You can see a working example, from the [`~/example` folder](https://github.com/quick-vite/gh-pages-spa/tree/main/example), here: <https://quick-vite.github.io/gh-pages-spa/>.
 
 ## What is it?
