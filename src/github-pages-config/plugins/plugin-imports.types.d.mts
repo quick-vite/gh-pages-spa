@@ -8,7 +8,15 @@
  * import { routeBase } from 'virtual:@quick-vite/gh-pages-spa/route-base'
  * ```
  */
+
 declare module 'virtual:@quick-vite/gh-pages-spa/route-base' {
+	/** This is a variable containing the route base path for using in routers. */
+	export const routeBase: string;
+	export default routeBase;
+}
+
+// This is for JSR support
+declare module 'file:@quick-vite/gh-pages-spa/route-base' {
 	/** This is a variable containing the route base path for using in routers. */
 	export const routeBase: string;
 	export default routeBase;

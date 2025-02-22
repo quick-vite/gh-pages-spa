@@ -21,7 +21,7 @@
   ],
   "type": "module",
   "scripts": {
-    "publish:jsr": "pnpm build && pnpm dlx jsr publish",
+    "publish:jsr": "pnpm build && pnpm dlx jsr publish --allow-slow-types",
     "dev": "vite build --mode development --watch",
     "build": "vite build"
   },
@@ -41,6 +41,7 @@
     "typescript": "~5.7.2",
     "vite-plugin-dts": "^4.5.0",
     "vite-plugin-multiple": "^0.2.0",
-    "vite-plugin-solid": "^2.11.0"
+    "vite-plugin-solid": "^2.11.0",
+    "vite-plugin-string-replace": "^1.1.3"
   }
 }

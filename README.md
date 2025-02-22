@@ -119,7 +119,7 @@ render(() =>
 )
 ```
 
-The `routeBase` is extracted from your `package.json`, this is effectively the `virtual:@quick-vite/gh-pages-spa/route-base` import.  
+The `routeBase` is extracted from your `package.json`.  
 The `<PagesReRouter>` component is a custom route that handles the encoded urls for you.
 
 And that's it, now you can run vite like normal and [deploy it to GitHub Pages](#deploying).  

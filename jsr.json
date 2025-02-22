@@ -14,7 +14,8 @@
     "publish": {
         "exclude": [ "!static", "./example" ],
         "include": [
-            "./src/**/*.*ts",
+            "./src/**/*.mts",
+            "./src/**/*.tsx",
             "./static/*.*",
             "LICENSE",
             "README.md"
