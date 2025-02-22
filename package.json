@@ -1,8 +1,20 @@
 {
   "name": "@quick-vite/gh-pages-spa",
+  "description": "A quick setup for hosting a SPA on GitHub pages using Vite.",
   "version": "6.2.0",
   "license": "Apache-2.0",
+	"keywords": ["gh-pages", "spa", "vite"],
   "packageManager": "pnpm@9.1.1",
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/quick-vite/gh-pages-spa"
+  },
+  "bugs": {
+    "type": "github",
+    "url": "https://github.com/quick-vite/gh-pages-spa"
+  },
+  "homepage": "https://github.com/quick-vite/gh-pages-spa",
+  "readme": "https://github.com/quick-vite/gh-pages-spa#readme",
   "exports": {
     "./config": {
       "import": "./dist/github-pages-config.js",
@@ -18,7 +30,11 @@
     }
   },
   "files": [
-    "./static/404.html"
+    "./static/404.html",
+    "./src",
+    "./dist",
+    "./LICENSE",
+    "./README.md"
   ],
   "type": "module",
   "scripts": {

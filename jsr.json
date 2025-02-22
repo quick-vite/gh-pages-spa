@@ -1,7 +1,9 @@
 {
     "name": "@quick-vite/gh-pages-spa",
+    "description": "A quick setup for hosting a SPA on GitHub pages using Vite.",
     "version": "6.2.0",
     "license": "Apache-2.0",
+	"keywords": ["gh-pages", "spa", "vite"],
     "exports": {
         "./config": "./src/github-pages-config/_module.mts",
         "./vanilla": "./src/github-pages-vanilla/src/_module.mts",
