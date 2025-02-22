@@ -21,7 +21,7 @@ export function encodeUrl(location:URL | Location, customDomain: boolean) {
     // https://username.github.io/repo-name/one/two?a=b&c=d#qwe becomes
     // https://username.github.io/repo-name/?/one/two&a=b~and~c=d#qwe
     // Otherwise, leave pathSegmentsToKeep as 0.
-    const pathSegmentsToKeep = customDomain ? 1 : 0
+    const pathSegmentsToKeep = customDomain ? 0 : 1
 
     const baseUrl =location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
     const encodedPathStart = location.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/';

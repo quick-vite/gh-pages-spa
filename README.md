@@ -1,6 +1,6 @@
 # Vite config `gh-pages-spa`  
 
-[![JSR](https://jsr.io/badges/@quick-vite/gh-pages-spa)](https://jsr.io/@quick-vite/gh-pages-spa)
+[![JSR](https://jsr.io/badges/@quick-vite/gh-pages-spa)](https://jsr.io/@quick-vite/gh-pages-spa) 
 [![NPM](https://img.shields.io/npm/v/%40quick-vite%2Fgh-pages-spa)](https://www.npmjs.com/package/@quick-vite/gh-pages-spa)
 
 A quick setup for hosting a SPA on [GitHub pages](https://pages.github.com/) using [Vite](https://pages.github.com/).  
@@ -132,6 +132,44 @@ You can use [our example pipeline](https://github.com/quick-vite/gh-pages-spa/bl
 
 Alternatively, you can deploy it using the [`gh-pages` npm package](https://www.npmjs.com/package/gh-pages).  
 Just don't forget to add the `--nojekyll` flag.
+
+## SEO
+
+If you need your App to be SEO friendly you'll need to provide search engines with a sitemap that's preloaded with the transformed URLs and a robots.txt that points to that sitemap.
+
+We provide you with a vite plugin to help you with that.
+Simply, import the `seo` plugin and configure it with the relative paths you need to be indexed.
+
+```ts
+import { gitHubSpaConfig, seo } from "@quick-vite/gh-pages-spa/config";
+
+import packageJson from './package.json' with { type: 'json' }
+
+export default gitHubSpaConfig(packageJson, {
+    plugins: [
+        /* solid() / injectGitHubPagesRedirect() */ 
+        seo(
+            packageJson,
+            '/',
+            '/example/1/',
+            '/example/2/',
+            '/one/two?a=b&c=d#qwe'
+        )
+    ]
+})
+```
+
+The above configuration will generate a `sitemap.txt` like so: (the domain and subpath are an example)
+
+```txt
+https://quick-vite.github.io/gh-pages-spa/?/
+https://quick-vite.github.io/gh-pages-spa/?/example/1/
+https://quick-vite.github.io/gh-pages-spa/?/example/2/
+https://quick-vite.github.io/gh-pages-spa/?/one/two&a=b~and~c=d#qwe
+```
+
+Additionally, a `robots.txt` will be added with a reference to this sitemap.  
+If you define a `robots.txt` in your `./src/public/` folder, it will be appended with the reference.  
 
 ## Versioning
 
