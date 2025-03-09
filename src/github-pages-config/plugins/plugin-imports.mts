@@ -14,7 +14,7 @@ import { virtualImport } from '../../virtual/import.mts';
  * import { routeBase } from 'virtual:@quick-vite/gh-pages-spa/route-base'
  * ```
  */
-export const pluginVirtualImports = (routeBase: string): Plugin => {
+export const pluginVirtualImports = (routeBase: string | undefined): Plugin => {
 
 	const pluginName = 'vite-plugin-gh-pages-spa/imports'
 
@@ -29,7 +29,7 @@ export const pluginVirtualImports = (routeBase: string): Plugin => {
 }
 
 /** Import for the virtual routeBase module */
-const virtualRouteBase = (routeBase: string) => virtualImport(
+const virtualRouteBase = (routeBase: string | undefined) => virtualImport(
 	'@quick-vite/gh-pages-spa/route-base', 
 	{
 		code: `

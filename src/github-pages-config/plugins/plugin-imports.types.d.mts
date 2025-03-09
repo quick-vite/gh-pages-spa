@@ -11,6 +11,6 @@
 
 declare module 'virtual:@quick-vite/gh-pages-spa/route-base' {
 	/** This is a variable containing the route base path for using in routers. */
-	export const routeBase: string;
+	export const routeBase: string | undefined;
 	export default routeBase;
 }

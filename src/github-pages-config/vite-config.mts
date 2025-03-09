@@ -7,49 +7,43 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { pluginVirtualImports } from './plugins/plugin-imports.mts'
 import { GitHubPackageJson } from '../shared/package-json.mts'
 import { encodeUrl } from '../shared/encode-url.mts'
+import { parseBase } from './parse-base.mts'
 
 const __dirname = fileURLToPath(new URL("./", import.meta.url))
 
-const baseRegex = /^https:\/\/[^/\\]*\.github\.io\/(?<repo>[^/\\]*)\/$/isd
-const parseBase = (packageJson: GitHubPackageJson) => {
+const appendConfig = (packageJson: GitHubPackageJson, userConfig: UserConfig) => {
 
-	const { homepage } = packageJson;
+	const [pathBase, routePath, skipSegments] = parseBase(packageJson)
 
-	if (!homepage) throw new Error('You need to configure your GitHub-Pages homepage in the package json.')
-	const result = homepage.match(baseRegex);
-	if (!result?.groups?.repo) throw new Error('A GitHub-Pages URL needs to be formatted like "https://{user}.github.io/{repo}/"')
-
-	return result.groups!['repo']!
-}
-
-const appendConfig = (packageJson: GitHubPackageJson, userConfig: UserConfig) => Object.assign(userConfig, {
-	appType: 'spa',
-	base: `/${parseBase(packageJson)}/`,
-	plugins: [
-		pluginVirtualImports(`/${parseBase(packageJson)}`),
-		viteStaticCopy({
-			targets: [
-				{
-					src: normalizePath(path.resolve(__dirname, '../static/404.html')),
-					dest: '',
-					transform(content: string) {
-						return content
-							.replace(
-								'encodeUrl(window.location, false)',
-								`${encodeUrl.toString()}
-								window.location.replace(encodeUrl(window.location, false))`
-							)
-							.replace(
-								'<title></title>',
-								`<title>${packageJson.homepage}</title>`
-							)
+	return Object.assign(userConfig, {
+		appType: 'spa',
+		base: pathBase,
+		plugins: [
+			pluginVirtualImports(routePath),
+			viteStaticCopy({
+				targets: [
+					{
+						src: normalizePath(path.resolve(__dirname, '../static/404.html')),
+						dest: '',
+						transform(content: string) {
+							return content
+								.replace(
+									'encodeUrl(window.location, false)',
+									`${encodeUrl.toString()}
+									window.location.replace(encodeUrl(window.location, ${skipSegments}))`
+								)
+								.replace(
+									'<title></title>',
+									`<title>${packageJson.homepage}</title>`
+								)
+						}
 					}
-				}
-			]
-		}),
-		...userConfig.plugins ?? [],
-	]
-} as ViteUserConfig)
+				]
+			}),
+			...userConfig.plugins ?? [],
+		]
+	} as ViteUserConfig)
+}
 
 /** @inheritdoc ViteUserConfig */
 type UserConfig = Omit<ViteUserConfig, 'appType'>
