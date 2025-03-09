@@ -37,6 +37,16 @@ This is both necessary for publishing to GitHub Pages, and we use it for the rou
 }
 ```
 
+> [!IMPORTANT]  
+> The `"homepage"` supports two modes, `gh-pages` and regular url.  
+>
+> If you host on `gh-pages` you will have stricter validation, you'll need to match
+> `https://{account}.github.io/{repo}/` any other url is not accepted.  
+>
+> With any other domain, you can have as many path segments as you like, keep in mind the `/?/` hack
+> will be inserted after the path you specify in the package json.  
+> See [./](./src/github-pages-config/__tests__/parse-base.test.ts) for detailed scenarios.  
+
 ### Vanilla routing
 
 Make sure your Vite config at least has this configuration:
