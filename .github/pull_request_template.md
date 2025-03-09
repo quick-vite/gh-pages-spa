@@ -12,4 +12,5 @@ Fixes: <!-- Please refer to your issue number here: -->
 
 - [ ] Meets acceptance criteria of story / Fixed bug
 - [ ] Updated documentation
+- [ ] Added/Updated tests
 - [ ] Version(s) updated
