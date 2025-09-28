@@ -29,7 +29,7 @@ export const seo = (packageJson: GitHubPackageJson, ...paths: string[]): Plugin 
 		name: pluginName,
 		enforce: 'post',
 
-		async buildStart(options) {
+		async buildStart(_options) {
 			this.emitFile({
 				type: 'asset',
 				fileName: 'sitemap.txt',
