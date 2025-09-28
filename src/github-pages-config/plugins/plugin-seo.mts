@@ -3,6 +3,7 @@ import path, { dirname } from 'node:path'
 import { access, readFile } from "node:fs/promises";
 import { GitHubPackageJson } from '../../shared/package-json.mts';
 import { encodeUrl } from '../../shared/encode-url.mts';
+import { parseBase } from '../parse-base.mts';
 
 /**
  * ## `vite-plugin-gh-pages-spa/seo`
@@ -22,6 +23,7 @@ export const seo = (packageJson: GitHubPackageJson, ...paths: string[]): Plugin 
 
 	const pluginName = 'vite-plugin-gh-pages-spa/solidjs-seo'
 	let projectDir = process.cwd();
+		const [, , skipSegments] = parseBase(packageJson)
 
 	return ({
 		name: pluginName,
@@ -39,7 +41,7 @@ export const seo = (packageJson: GitHubPackageJson, ...paths: string[]): Plugin 
 						.replace('https:\\', 'https://')
 						.replaceAll( '\\', '/')
 					)
-					.map(url => encodeUrl(new URL(url), false))
+					.map(url => encodeUrl(new URL(url), skipSegments))
 					.join('\n')
 			})
 
@@ -85,11 +87,6 @@ export const seo = (packageJson: GitHubPackageJson, ...paths: string[]): Plugin 
 		configResolved(config) {
 			if (config.configFile)
 				projectDir = dirname(config.configFile)
-		},
-
-		async load(id, options) {
-
-			
 		},
 	})
 }
