@@ -8,7 +8,6 @@ import { pluginVirtualImports } from './plugins/plugin-imports.mts'
 import { GitHubPackageJson } from '../shared/package-json.mts'
 import { encodeUrl } from '../shared/encode-url.mts'
 import { parseBase } from './parse-base.mts'
-import { ExternalOption } from 'rollup'
 
 const __dirname = fileURLToPath(new URL("./", import.meta.url))
 
