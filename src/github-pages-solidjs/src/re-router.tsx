@@ -1,6 +1,6 @@
 import { Component, ParentComponent } from 'solid-js';
 import { Route, RouteSectionProps, useNavigate } from '@solidjs/router';
-import { routeBase } from './route-base.mts';
+import { routeBase } from '../../shared/route-base.mts';
 import { decodeGitHubPagesUrl } from '../../shared/decode-url.mts'
 
 /**
@@ -15,7 +15,7 @@ export const PagesReRouter: ParentComponent = (props) => <Route path="*" compone
  */
 const PagesReRouterHandler: Component<RouteSectionProps> = (props) => {
 
-    if (!window.location.href.includes(`${routeBase}/?/`)) 
+    if (!window.location.href.includes(`${routeBase()}/?/`)) 
         return props.children
 
     const navigator = useNavigate()

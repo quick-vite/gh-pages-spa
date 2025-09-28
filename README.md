@@ -82,8 +82,8 @@ const fixedPath = replaceGitHubPagesUrl(example)
 
 console.log(fixedPath) //: "https://quick-vite.github.io/gh-pages-spa/path1/"
 
-// If you need to know the route-base of you GitHub Pages app, you can access this through the `routeBase` constant
-console.log(routeBase) //: "/gh-pages-spa"
+// If you need to know the route-base of you GitHub Pages app, you can access this through the `routeBase` getter
+console.log(routeBase()) //: "/gh-pages-spa"
 ```
 
 And that's it, now you can run vite like normal and [deploy it to GitHub Pages](#deploying).  
@@ -121,7 +121,7 @@ import { NotFoundPage } from './pages/404'
 import { Example } from './pages/example'
 
 render(() =>
-    <Router base={routeBase} root={AppRoot}>
+    <Router base={routeBase()} root={AppRoot}>
         <PagesReRouter>
             <Route path="/example/:id/" component={Example} />
             <Route path="/" component={LandingPage} />

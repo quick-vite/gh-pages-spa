@@ -8,7 +8,7 @@ import { LandingPage } from './pages/landing-page'
 import { NotFoundPage } from './pages/404'
 import { Example } from './pages/example'
 
-export const routes = <Router base={routeBase} root={AppRoot}>
+export const routes = <Router base={routeBase()} root={AppRoot}>
 	<PagesReRouter>
 		<Route path="/example/:id/" component={Example} />
 		<Route path="/" component={LandingPage} />

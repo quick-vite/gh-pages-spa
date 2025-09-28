@@ -5,7 +5,7 @@ import multiple from 'vite-plugin-multiple'
 export default defineConfig({
     define: {
         // This is so we can use the import.meta stuff from library context
-        'import_meta': 'import.meta'
+        'import_meta': 'import.meta',
     },
     resolve: {
         preserveSymlinks: true,
@@ -15,8 +15,6 @@ export default defineConfig({
             tsconfigPath: "./tsconfig.json",
             // This doesn't seem to work when the entries have the same filename
             rollupTypes: false,
-            // Necessary for virtual imports
-            copyDtsFiles: true,
             include: [
                 './src/**'
             ],
@@ -35,11 +33,6 @@ export default defineConfig({
         minifyIdentifiers: false,
         keepNames: true
     },
-    optimizeDeps: {
-        exclude: [
-            'virtual:quick-vite-gh-pages-spa-route-base'
-        ]
-    },
     build: {
         target: 'esnext',
         ssr: true,
@@ -49,8 +42,7 @@ export default defineConfig({
                 esModule: true,
             },
             external: [
-                /^vite/,
-                /^virtual:/,
+                /^vite/
             ]
         },
         lib: {
