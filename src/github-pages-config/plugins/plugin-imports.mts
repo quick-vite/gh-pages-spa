@@ -11,7 +11,7 @@ import { virtualImport } from '../../virtual/import.mts';
  * 
  * ### `routeBase`
  * ```tsx
- * import { routeBase } from 'virtual:@quick-vite/gh-pages-spa/route-base'
+ * import { routeBase } from 'virtual:quick-vite-gh-pages-spa-route-base'
  * ```
  */
 export const pluginVirtualImports = (routeBase: string | undefined): Plugin => {
@@ -30,7 +30,7 @@ export const pluginVirtualImports = (routeBase: string | undefined): Plugin => {
 
 /** Import for the virtual routeBase module */
 const virtualRouteBase = (routeBase: string | undefined) => virtualImport(
-	'@quick-vite/gh-pages-spa/route-base', 
+	'@quick-vite-gh-pages-spa-route-base', 
 	{
 		code: `
 			export const routeBase = ${JSON.stringify(routeBase)};
