@@ -37,7 +37,7 @@ export default defineConfig({
     },
     optimizeDeps: {
         exclude: [
-            'virtual:@quick-vite/gh-pages-spa/route-base'
+            'virtual:quick-vite-gh-pages-spa-route-base'
         ]
     },
     build: {
