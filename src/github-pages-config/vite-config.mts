@@ -4,7 +4,6 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { viteStaticCopy } from 'vite-plugin-static-copy'
-import { pluginVirtualImports } from './plugins/plugin-imports.mts'
 import { GitHubPackageJson } from '../shared/package-json.mts'
 import { encodeUrl } from '../shared/encode-url.mts'
 import { parseBase } from './parse-base.mts'
@@ -18,8 +17,11 @@ const appendConfig = (packageJson: GitHubPackageJson, userConfig: UserConfig) =>
 	return Object.assign(userConfig, {
 		appType: 'spa',
 		base: pathBase,
+		define: {
+			'__routeBase__': JSON.stringify(routePath),
+			'window.__routeBase__': JSON.stringify(routePath),
+		},
 		plugins: [
-			pluginVirtualImports(routePath),
 			viteStaticCopy({
 				targets: [
 					{

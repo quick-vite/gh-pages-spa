@@ -3,5 +3,5 @@
  * @module
  */
 
-export * from "./route-base.mts";
+export { routeBase } from "../../shared/route-base.mts";
 export * from "./re-router";

@@ -6,6 +6,4 @@
 export * from "./vite-config.mts"
 export * from "./plugins/plugin-redirect.mts"
 export * from "./plugins/plugin-seo.mts"
-
-// @ts-expect-error
-export type * from "./plugins/plugin-imports.types.d.mts"
+export * from "../shared/route-base.mts";

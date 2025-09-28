@@ -17,8 +17,6 @@ export default defineConfig({
             tsconfigPath: "./tsconfig.json",
             // This doesn't seem to work when the entries have the same filename
             rollupTypes: false,
-            // Necessary for virtual imports
-            copyDtsFiles: true,
             outDir: normalizePath(path.resolve(__dirname, '../../dist/github-pages-solidjs')),
             entryRoot: normalizePath(path.resolve(__dirname, './src/')),
             include: [
@@ -45,7 +43,6 @@ export default defineConfig({
                 /^solid-js/,
                 /^@solidjs/,
                 /^vite/,
-                /^virtual:/,
             ]
         },
         outDir: normalizePath(path.resolve(__dirname, '../../dist')),

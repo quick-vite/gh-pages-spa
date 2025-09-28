@@ -4,4 +4,4 @@
  */
 
 export * from "./url-fix.mts";
-export * from "./route-base.mts";
+export { routeBase } from "../../shared/route-base.mts";

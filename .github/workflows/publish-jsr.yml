@@ -1,7 +1,3 @@
-## At this moment, JSR supports neither TSX nor virtual modules.
-## Because of this, we will not pursue JSR for now.
-## This pipeline is still active, however, deployments fail.
-
 name: Publish `jsr`
 
 on:
