@@ -8,6 +8,7 @@ import { pluginVirtualImports } from './plugins/plugin-imports.mts'
 import { GitHubPackageJson } from '../shared/package-json.mts'
 import { encodeUrl } from '../shared/encode-url.mts'
 import { parseBase } from './parse-base.mts'
+import { ExternalOption } from 'rollup'
 
 const __dirname = fileURLToPath(new URL("./", import.meta.url))
 
@@ -41,10 +42,33 @@ const appendConfig = (packageJson: GitHubPackageJson, userConfig: UserConfig) =>
 				]
 			}),
 			...userConfig.plugins ?? [],
-		]
+		],
+		
+		optimizeDeps: {
+			...userConfig.optimizeDeps,
+			exclude: [
+				...(userConfig.optimizeDeps?.exclude ?? []),
+				'virtual:@quick-vite/gh-pages-spa/route-base'
+			]
+		},
+		build:{
+			rollupOptions: {
+				...userConfig.build?.rollupOptions,
+				external: buildExternalList(userConfig.build?.rollupOptions?.external)
+			}
+		}
 	} as ViteUserConfig)
 }
 
+function buildExternalList(external: ExternalOption | undefined): ExternalOption {
+	if (!external) return [/^virtual:/]
+	if (typeof external === "string" || external instanceof RegExp) return [external, /^virtual:/]
+	if (Array.isArray(external)) return [...external, /^virtual:/]
+	return (source: string, importer: string | undefined, isResolved: boolean) => {
+		if (/^virtual:/.test(source)) return true
+		return external(source, importer, isResolved);
+	}
+}
 /** @inheritdoc ViteUserConfig */
 type UserConfig = Omit<ViteUserConfig, 'appType'>
 /** @inheritdoc ViteUserConfig */

@@ -31,7 +31,10 @@ export default defineConfig({
     ],
     esbuild: {
         minifyIdentifiers: false,
-        keepNames: true
+        keepNames: true,
+    },
+    optimizeDeps: {
+        exclude: ['virtual:@quick-vite/gh-pages-spa/route-base']
     },
     build: {
         target: 'esnext',
