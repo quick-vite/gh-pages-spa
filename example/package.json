@@ -14,11 +14,11 @@
     "@quick-vite/gh-pages-spa": "workspace:^"
   },
   "devDependencies": {
-    "vite": "^7.1.7",
+    "vite": "^7.1.9",
     "gh-pages": "^6.3.0",
     "solid-js": "^1.9.9",
     "@solidjs/router": "^0.15.3",
-		"vite-plugin-solid": "^2.11.8"    
+		"vite-plugin-solid": "^2.11.9"    
   },
   "author": "quick-vite",
   "license": "Apache-2.0"
