@@ -18,6 +18,7 @@ const appendConfig = (packageJson: GitHubPackageJson, userConfig: UserConfig) =>
 		appType: 'spa',
 		base: pathBase,
 		define: {
+			...userConfig.define ?? { },
 			'__routeBase__': JSON.stringify(routePath),
 			'window.__routeBase__': JSON.stringify(routePath),
 		},
