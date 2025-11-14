@@ -38,6 +38,8 @@ export const seo = (packageJson: GitHubPackageJson, ...paths: string[]): Plugin 
 				source: paths
 					.map(route => path
 						.join(packageJson.homepage, route)
+						// Fix for new node route starting with '.\'
+						.replace(/^\.[\/\\]https/si, 'https')
 						.replace('https:\\', 'https://')
 						.replaceAll( '\\', '/')
 					)

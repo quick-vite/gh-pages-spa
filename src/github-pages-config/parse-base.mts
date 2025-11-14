@@ -61,10 +61,11 @@ export const parseBase = (packageJson: GitHubPackageJson): BaseResult => {
 
 	if (!homepage) throw new Error('You need to configure your GitHub-Pages homepage in the package json.')
 	const result = homepage.match(ghPagesRegex);
-    const isPagesUrl = !!result?.groups?.ghpages
-	if (isPagesUrl && result?.groups?.error) throw new Error('A GitHub-Pages URL needs to be formatted like "https://{user}.github.io/{repo}/"')
-	if (isPagesUrl && result?.groups?.repo) return [`/${result!.groups!.repo!}/`, result!.groups!.repo!, 1]
-	if (isPagesUrl && !result?.groups?.repo) throw new Error('A GitHub-Pages URL needs to be formatted like "https://{user}.github.io/{repo}/"')
+
+	const isPagesUrl = !!result?.groups?.ghpages
+	if (isPagesUrl && !!result?.groups?.error) throw new Error(' 1 A GitHub-Pages URL needs to be formatted like "https://{user}.github.io/{repo}/"')
+	if (isPagesUrl && !!result?.groups?.repo) return [`/${result!.groups!.repo!}/`, result!.groups!.repo!, 1]
+	if (isPagesUrl && !result?.groups?.repo) throw new Error(' 2 A GitHub-Pages URL needs to be formatted like "https://{user}.github.io/{repo}/"')
 
 	const pathBase = new URL(homepage).pathname
 		.trim()
