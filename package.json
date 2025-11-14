@@ -8,6 +8,7 @@
     "spa",
     "vite"
   ],
+  "packageManager": "pnpm@10.22.0",
   "repository": {
     "type": "github",
     "url": "https://github.com/quick-vite/gh-pages-spa"
