@@ -137,6 +137,51 @@ The `<PagesReRouter>` component is a custom route that handles the encoded urls 
 
 And that's it, now you can run vite like normal and [deploy it to GitHub Pages](#deploying).  
 
+#### SolidJs Dynamic routes
+
+If you want to load pages dynamically, this library offers a utility.
+
+To dynamically load a page you can use solid's `lazy`.  
+However, in the case you don't have default exports, you can use `namedLazy` instead.  
+This can be used like this:  
+
+```ts
+// Defining a dynamic route component
+const ExamplePage = namedLazy(() => import("./pages/example").then(m => m.Example));
+// Using the route remains the same
+<Route path="/example/:id/" component={ExamplePage} />
+```
+
+The usefulness of this can be debated, but, it offers a way of consistent exports without having to write the wrappers yourself.  
+Additionally it offers a way to have multiple page exports in one file.
+
+#### SolidJs Chunking
+
+In he case you want split of the parts of `solidjs`, `@solidjs/router`, and this library itself into it's own chunk.  
+You can simply use `solidVendorChunks` in the `vite.config` and you will get that for free.
+
+```ts
+import { solidVendorChunks } from "@quick-vite/gh-pages-spa/solidjs/vite";
+import solid from 'vite-plugin-solid'
+
+import packageJson from './package.json' with { type: 'json' }
+
+export default gitHubSpaConfig(packageJson, {
+ plugins: [
+  // 
+ ],
+ build: {
+  rollupOptions: {
+   output: {
+    manualChunks: solidVendorChunks,
+   }
+  },
+  // target: 'esnext',
+  // sourcemap: 'inline'
+ }
+})
+```
+
 ## Deploying
 
 To deploy to GitHub Pages you'll need to add a pipeline using [`actions/deploy-pages@v4`](https://github.com/actions/deploy-pages).  

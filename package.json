@@ -31,6 +31,10 @@
     "./solidjs": {
       "import": "./dist/github-pages-solidjs.js",
       "types": "./dist/github-pages-solidjs/_module.d.mts"
+    },
+    "./solidjs/vite": {
+      "import": "./dist/github-pages-solidjs-vite.js",
+      "types": "./dist/github-pages-solidjs/vite-config/_module.d.mts"
     }
   },
   "files": [

@@ -5,3 +5,4 @@
 
 export { routeBase } from "../../shared/route-base.mts";
 export * from "./re-router";
+export * from "./named-lazy.mts";

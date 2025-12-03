@@ -48,12 +48,10 @@ jobs:
           check-latest: true
       - name: Install dependencies
         run: pnpm install
-      - name: Build lib
-        run: pnpm build
         working-directory: '.'
-      - name: Build example
-        run: pnpm build
-        working-directory: './example'
+      - name: Build projects
+        run: pnpm -r run build
+        working-directory: '.'
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

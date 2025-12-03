@@ -51,6 +51,7 @@ export default defineConfig({
             formats: ['es'],
             entry: {
                 'github-pages-solidjs':  normalizePath(path.resolve(__dirname, './src/_module.mts')),
+                'github-pages-solidjs-vite':  normalizePath(path.resolve(__dirname, './src/vite-config/_module.mts')),
             }
         }
     }
