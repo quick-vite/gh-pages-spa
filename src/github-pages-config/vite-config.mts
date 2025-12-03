@@ -22,6 +22,10 @@ const appendConfig = (packageJson: GitHubPackageJson, userConfig: UserConfig) =>
 			'__routeBase__': JSON.stringify(routePath),
 			'window.__routeBase__': JSON.stringify(routePath),
 		},
+		build: {
+			...userConfig.build ?? { },
+			copyPublicDir: true
+		},
 		plugins: [
 			viteStaticCopy({
 				targets: [
