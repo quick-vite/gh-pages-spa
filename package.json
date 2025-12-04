@@ -65,11 +65,11 @@
   },
   "devDependencies": {
     "@types/node": "^24.10.1",
-    "rollup": "^4.53.2",
+    "rollup": "^4.53.3",
     "typescript": "~5.9.3",
     "vite-plugin-dts": "^4.5.4",
     "vite-plugin-multiple": "^0.2.0",
     "vite-plugin-solid": "^2.11.10",
-    "vitest": "^4.0.9"
+    "vitest": "^4.0.15"
   }
 }
